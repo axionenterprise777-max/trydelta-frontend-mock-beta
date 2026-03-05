@@ -1,0 +1,30 @@
+{
+  "name": "trydelta-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.2.0",
+    "@fortawesome/free-brands-svg-icons": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
+    "@fortawesome/react-fontawesome": "^3.2.0",
+    "framer-motion": "^12.34.5",
+    "next": "15.5.12",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "recharts": "^3.7.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/node": "24.0.1",
+    "@types/react": "19.1.2",
+    "@types/react-dom": "19.1.2",
+    "typescript": "5.8.3"
+  }
+}
