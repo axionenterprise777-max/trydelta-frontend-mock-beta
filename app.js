@@ -1,6 +1,6 @@
 const { spawn } = require("node:child_process");
 
-const port = process.env.PORT || "3000";
+const port = process.env.PORT || process.env.PASSENGER_PORT || "3000";
 const host = process.env.HOST || "0.0.0.0";
 
 const args = [
