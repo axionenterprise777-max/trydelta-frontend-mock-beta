@@ -6,7 +6,7 @@ const path = require("path");
 const http = require("http");
 
 const appDir = path.join(__dirname, "..", "frontend");
-const next = require(path.join(appDir, "node_modules", "next"));
+const next = require("next");
 const nextApp = next({ dev: false, dir: appDir });
 const handle = nextApp.getRequestHandler();
 const ready = nextApp.prepare();
