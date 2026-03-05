@@ -1,22 +1,30 @@
-const http = require("node:http");
-const path = require("node:path");
-const { createRequire } = require("node:module");
+const { spawn } = require("node:child_process");
 
-const port = Number(process.env.PASSENGER_PORT || process.env.PORT || 3000);
+const port = process.env.PASSENGER_PORT || process.env.PORT || "3000";
 const host = process.env.HOST || "0.0.0.0";
 
-const appDir = path.join(__dirname, "frontend");
-process.chdir(appDir);
+const args = [
+  "run",
+  "start",
+  "--workspace",
+  "frontend",
+  "--",
+  "--hostname",
+  host,
+  "--port",
+  String(port),
+];
 
-const requireFromFrontend = createRequire(path.join(appDir, "package.json"));
-const next = requireFromFrontend("next");
-const app = next({ dev: false, hostname: host, port });
-const handle = app.getRequestHandler();
+const child = spawn("npm", args, {
+  stdio: "inherit",
+  env: process.env,
+  shell: process.platform === "win32",
+});
 
-app.prepare().then(() => {
-  http.createServer((req, res) => {
-    handle(req, res);
-  }).listen(port, host, () => {
-    console.log(`Next server listening on http://${host}:${port}`);
-  });
+child.on("exit", (code, signal) => {
+  if (signal) {
+    process.kill(process.pid, signal);
+    return;
+  }
+  process.exit(code ?? 1);
 });
